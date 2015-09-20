@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Price Manager</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<section id="messages">
+  <% if flash[:notice] %>
+    <div id="notice" class="alert alert-success flash"><%= flash[:notice] %></div>
+  <% end %>
+
+  <% if flash[:warning] %>
+    <div id="warning" class="alert alert-warning flash"><%= flash[:warning] %></div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div id="error" class="alert alert-danger flash"><%= flash[:error] %></div>
+  <% end %>
+</section>
+
+<%= yield %>
+
+</body>
+</html>

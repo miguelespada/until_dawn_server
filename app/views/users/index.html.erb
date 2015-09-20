@@ -1,0 +1,32 @@
+<h1>Listing users</h1>
+
+<%= link_to 'New User', new_user_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Male</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each_with_index do |user, i| %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= user.name %></td>
+        <td><%= user.male %></td>
+        <td><%= user.indice %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>

@@ -1,0 +1,6 @@
+= simple_form_for @user do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :male, as: :boolean
+  = f.input :indice, collection: 0..100
+  = f.button :submit
