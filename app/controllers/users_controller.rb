@@ -77,24 +77,25 @@ class UsersController < ApplicationController
     @user.thermal = Array.new if @user.thermal.nil?
 
     if @user.active
+
+      @user.update_temp params['temperature']
+    
+      @user.conductance << params['conductance'].to_f if params['conductance']
+      @user.conductance.shift if @user.conductance.count > 1200
+
+      @user.galvanicVoltage << params['galvanicVoltage'].to_f if params['galvanicVoltage']
+      @user.galvanicVoltage.shift if @user.galvanicVoltage.count > 1200
+      
+
       @user.stress << params['stress'].to_f if params['stress']
       @user.stress.shift if @user.stress.count > 1200
 
-      @user.temp << params['temperature'].to_f if params['temperature']
-      @user.temp.shift if @user.temp.count > 200
-
-      @user.conductance << params['conductance'].to_f if params['conductance']
-      @user.conductance.shift if @user.conductance.count > 200
-
-      @user.galvanicVoltage << params['galvanicVoltage'].to_f if params['galvanicVoltage']
-      @user.galvanicVoltage.shift if @user.galvanicVoltage.count > 200
 
       @user.flow << params['flow'].to_f if params['flow']
-      @user.flow.shift if @user.flow.count > 200
-
+      @user.flow.shift if @user.flow.count > 1200
 
       @user.thermal << params['thermal'].to_f if params['thermal']
-      @user.thermal.shift if @user.thermal.count > 200
+      @user.thermal.shift if @user.thermal.count > 1200
     end
 
     @user.save
@@ -105,7 +106,7 @@ class UsersController < ApplicationController
     @user = User.last
     @user.heartRate = Array.new if @user.heartRate.nil?
     @user.heartRate << params['v'].to_f if params['v']
-    @user.heartRate.shift if @user.heartRate.count > 200
+    @user.heartRate.shift if @user.heartRate.count > 1200
     
     @user.save
     render json: @user
