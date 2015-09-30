@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.desc(:id)
   end
 
   def top
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def lastClassified
-    render json: User.all[1]
+    render json: User.all.desc(:id)[1]
   end
 
   def active
